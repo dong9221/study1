@@ -10,8 +10,9 @@ public class UserDetail  implements UserDetailsService {
 	public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-	//	User u = new User("admin", "1", true,true,true,true,);
+	//	User u = new User("admin", "1", true,true,true,true,);  
 		return null;
+		
 	}
 	
 }
