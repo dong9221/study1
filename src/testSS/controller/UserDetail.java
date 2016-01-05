@@ -12,7 +12,6 @@ public class UserDetail  implements UserDetailsService {
 		
 	//	User u = new User("admin", "1", true,true,true,true,);  
 		return null;
-		
 	}
 	
 }
