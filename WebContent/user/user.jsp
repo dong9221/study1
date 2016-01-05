@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="user/user.jsp">user</a>
-<a href="admin/admin.jsp">admin</a>
+user and admin user can view this page.
 </body>
 </html>
