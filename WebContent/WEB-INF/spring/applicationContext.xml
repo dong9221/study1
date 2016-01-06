@@ -3,19 +3,23 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	
+	
 <debug/>
-<!-- 不使用安全认证的文件1 -->
-<http pattern="**/*.js" security="none"></http>
 <!-- 使用安全认证的文件 -->
-<http auto-config="true">
+<http auto-config="true" use-expressions="true">
 	<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-	<intercept-url pattern="/**/user/**" access="hasRole('ROLE_USER')"/>
+	<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
 	<!-- 不使用安全认证的文件2 -->
 	<intercept-url pattern="/common/**" access="permitAll"/>
 	<access-denied-handler error-page="/common/deny.jsp"/>
+ 	<form-login login-page="/logon.jsp" authentication-failure-url="/logon.jsp?error" 
+		 password-parameter="password" username-parameter="username"/>
+	<logout logout-success-url="/logout" />
+	
 	<!-- <intercept-url pattern="/add_role.htm" access="hasRole('ROLE_ADMIN')" />
 	<form-login login-page="/login.htm"/>
 	<logout logout-url="/logout"/> -->
@@ -25,10 +29,12 @@
       <authentication-provider>
          <user-service>
             <user name="user" password="user" authorities="ROLE_USER"/>
-            <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>
+            <user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN"/>
          </user-service>
       </authentication-provider>
 </authentication-manager> 
+
+
 
 <!-- <http access-denied-page="/403.jsp"> 当访问被拒绝时，会转到403.jsp
 <intercept-url pattern="/login.jsp" filters="none"/>
